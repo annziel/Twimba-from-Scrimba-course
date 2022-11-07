@@ -1,5 +1,10 @@
-// import { tweetsData } from './data.js'
-// uncomment the previous line and delete tweetsData array below when local server set upped
+/* import tweetsData from another file & uuiv4,
+set up html type="module",
+delete tweetsData array below, and
+change the uuid in handleTweetBtnClick()
+when local server set upped
+*/
+
 const tweetsData = [   
     {
         handle: `@TrollBot66756542 💎`,
@@ -58,8 +63,6 @@ const tweetsData = [
         uuid: '8hy671sff-c0f5-4545-9c4b-1237gyys45',
     },     
 ]
-
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
 document.addEventListener('click', function(e){
     if(e.target.dataset.like){
@@ -123,7 +126,8 @@ function handleTweetBtnClick(){
             replies: [],
             isLiked: false,
             isRetweeted: false,
-            uuid: uuidv4()
+            uuid: "810a00ab-9659-40eb-a0a7-f63f10855e62"
+            // chenge the previous line to call the uuidv4() when local server set upped
         })
     render()
     tweetInput.value = ''

@@ -77,6 +77,9 @@ document.addEventListener('click', function(e){
     else if(e.target.id === 'tweet-btn'){
         handleTweetBtnClick()
     }
+    else if(e.target.classList.contains("fa-angle-down")){
+        console.log("clicked")
+    }
 })
  
 function handleLikeClick(tweetId){ 

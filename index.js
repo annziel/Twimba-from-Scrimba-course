@@ -63,6 +63,8 @@ const tweetsData = [
         uuid: '8hy671sff-c0f5-4545-9c4b-1237gyys45',
     },     
 ]
+const optionsModal = document.getElementById("options-modal")
+
 // eventListener and funtions it invokes
 document.addEventListener('click', function(e){
     if(e.target.dataset.like){
@@ -79,6 +81,7 @@ document.addEventListener('click', function(e){
     }
     else if(e.target.classList.contains("fa-angle-down")){
         console.log("clicked")
+        renderOptionsModal()
     }
 })
  
@@ -137,6 +140,10 @@ function handleTweetBtnClick(){
 
 }
 
+function renderOptionsModal() {
+    optionsModal.style.display = "block"
+}
+
 // generating and rendering posts
 function getFeedHtml(){
     let feedHtml = ``
@@ -181,7 +188,10 @@ function getFeedHtml(){
                 <div>
                     <span class="tweet-option">
                         <p class="handle">${tweet.handle}</p>
-                        <i class="fa-solid fa-angle-down" id="${tweetOptionsId}"></i>
+                        <i class="fa-solid fa-angle-down"
+                        id="${tweetOptionsId}"
+                        data-tweetoptions="${tweet.uuid}"
+                        ></i>
                     </span>
                     <p class="tweet-text">${tweet.tweetText}</p>
                     <div class="tweet-details">

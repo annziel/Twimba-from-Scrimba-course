@@ -148,3 +148,19 @@ button{
 #render{
     display:block;
 }
+
+/* modals */
+#options-modal{
+    display: none;
+    position: absolute;
+    background: #f0f0f0;
+    color: #555;
+    padding: 10px 20px;
+    width:100px;
+    height: 18px;
+    margin: auto;
+}
+
+#options-modal p{
+        margin: 0;
+}

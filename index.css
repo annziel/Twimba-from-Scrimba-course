@@ -153,14 +153,16 @@ button{
 #options-modal{
     display: none;
     position: absolute;
-    background: #f0f0f0;
+    background: #f4f4f4;
     color: #555;
     padding: 10px 20px;
     width:100px;
     height: 18px;
-    margin: auto;
+    /* margin: auto; */
+    border-radius: 3px;
 }
 
 #options-modal p{
         margin: 0;
+        font-size: 14px;
 }

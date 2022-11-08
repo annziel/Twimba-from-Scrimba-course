@@ -80,8 +80,7 @@ document.addEventListener('click', function(e){
         handleTweetBtnClick()
     }
     else if(e.target.classList.contains("fa-angle-down")){
-        console.log("clicked")
-        renderOptionsModal()
+        showOptionsModal(e)
     }
 })
  
@@ -140,8 +139,12 @@ function handleTweetBtnClick(){
 
 }
 
-function renderOptionsModal() {
-    optionsModal.style.display = "block"
+function showOptionsModal(e) {
+    Object.assign(optionsModal.style, {
+        left: `${(e.pageX)-140}px`,
+        top: `${e.pageY}px`,
+        display: "block",
+    })
 }
 
 // generating and rendering posts

@@ -17,6 +17,19 @@ i{
     cursor: pointer;
 }
 
+.tweet-option{
+    display:flex;
+    justify-content: space-between;
+}
+
+/* .not-display{
+    display: none;
+}
+
+.display{
+    display: block;
+} */
+
 .fa-solid{
     color: #999;
 }
@@ -109,13 +122,14 @@ button{
     font-size: 12px;
     font-weight: 500;
     color: #555;
-    margin-top: 0;
+    margin: 0;
 }
 
 .tweet-text{
     width: 207px;
     font-size: 14px;
     line-height: 20px;
+    margin-top: 10px;
 }
 
 /* images */
@@ -127,6 +141,10 @@ button{
 }
 
 /* utility */
-.hidden{
+.hidden, #hidden{
     display: none;
+}
+
+#render{
+    display:block;
 }

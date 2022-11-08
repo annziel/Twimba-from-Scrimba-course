@@ -139,6 +139,11 @@ function getFeedHtml(){
     let feedHtml = ``
     
     tweetsData.forEach(function(tweet){ 
+        let tweetOptionsId = 'hidden'
+        if(tweet.handle === `@Scrimba`){
+            tweetOptionsId = 'render'
+        }
+        
         let repliesHtml = ''
         if(tweet.replies.length > 0){
             tweet.replies.forEach(function(reply){
@@ -171,7 +176,10 @@ function getFeedHtml(){
             <div class="tweet-inner">
                 <img src="${tweet.profilePic}" class="profile-pic">
                 <div>
-                    <p class="handle">${tweet.handle}</p>
+                    <span class="tweet-option">
+                        <p class="handle">${tweet.handle}</p>
+                        <i class="fa-solid fa-angle-down" id="${tweetOptionsId}"></i>
+                    </span>
                     <p class="tweet-text">${tweet.tweetText}</p>
                     <div class="tweet-details">
                         <span class="tweet-detail">

@@ -22,14 +22,6 @@ i{
     justify-content: space-between;
 }
 
-/* .not-display{
-    display: none;
-}
-
-.display{
-    display: block;
-} */
-
 .fa-solid{
     color: #999;
 }
@@ -62,14 +54,26 @@ header{
 /* textareas + btn */
 
 textarea{
-    border: none;
     resize: none;
     padding: 10px;
-    margin: 0 0 20px 0;
+}
+
+#tweet-input{
+    border: none;
+    margin: 0 0 10px 0;
     height: 60px;
     width: 100%;
     font-size: 20px;
     line-height: 30px;
+}
+
+#reply-input{
+    margin: 0 10px 0 0;
+    border: 1px solid #D1DBE0;
+    border-radius: 5px;
+    background: #EDF7FD;
+    height: 14px;
+    font-size: 14px;
 }
 
 button{
@@ -82,6 +86,7 @@ button{
     cursor: pointer;
     font-size: 20px;
     font-weight: 600;
+    margin-bottom: 15px;
 }
 
 /* tweet */
@@ -90,13 +95,14 @@ button{
     border-top: 1px solid lightgray;
     padding: 20px 0 0 0;
     width: 100%;
-    margin: 15px 0;
+    margin: 0;
 }
 
 .tweet-inner{
     display: flex;
     align-items: flex-start;
     gap: 10px;
+    margin-bottom: 15px;
 }
 
 .tweet-details{
@@ -112,10 +118,26 @@ button{
 }
 
 .tweet-reply{
+    padding-top: 20px;
+    margin-right: 0;
+    margin-left: 40px;
+    padding-left: 0;
+    width: 250px;
+}
+
+#reply-area{
+    padding: 10px 0 10px 40px;
+    width: 250px;
+}
+
+.tweet-reply, #reply-area{
     border-top: 1px solid lightgray;
-    padding: 20px 0 0 0px;
-    margin: 10px 0 10px 40px;
-    width: 80%;
+
+}
+
+#reply-area .tweet-inner{
+    margin: 5px 0 5px 0;
+    align-items: center;
 }
 
 .handle{
@@ -126,10 +148,15 @@ button{
 }
 
 .tweet-text{
-    width: 207px;
+    width: 220px;
     font-size: 14px;
     line-height: 20px;
     margin-top: 10px;
+}
+
+.tweet-reply .tweet-text{
+    width: 180px;
+    margin-bottom: 0;
 }
 
 /* images */
@@ -138,6 +165,10 @@ button{
     border: 1px solid lightgray;
     border-radius: 50%;
     width: 48px;
+}
+
+#reply-area .profile-pic{
+    width: 34px;
 }
 
 /* utility */
@@ -149,7 +180,7 @@ button{
     display:block;
 }
 
-/* modals */
+/* modal */
 #options-modal{
     display: none;
     position: absolute;

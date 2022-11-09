@@ -237,8 +237,14 @@ function getFeedHtml(){
                 </div>            
             </div>
             <div class="hidden" id="replies-${tweet.uuid}">
+                <div id="reply-area">    
+                    <div class="tweet-inner">
+                            <img src="images/scrimbalogo.png" class="profile-pic">
+                            <textarea placeholder="Tweet your reply" id="reply-input"></textarea>
+                    </div>
+                </div>
                 ${repliesHtml}
-            </div>   
+            </div>
         </div>
         `
    })

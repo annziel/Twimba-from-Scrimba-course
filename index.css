@@ -157,12 +157,18 @@ button{
     color: #555;
     padding: 10px 20px;
     width:100px;
-    height: 18px;
-    /* margin: auto; */
     border-radius: 3px;
 }
 
 #options-modal p{
-        margin: 0;
-        font-size: 14px;
+    margin: 0;
+    font-size: 14px;
+}
+
+#options-modal:hover,
+#options-modal:focus,
+#options-modal:active {
+    background:  #1DA1F2;
+    color: white;
+    cursor: pointer;
 }

@@ -82,6 +82,9 @@ document.addEventListener('click', function(e){
     else if(e.target.classList.contains("fa-angle-down")){
         showOptionsModal(e)
     }
+    else if(!e.target.closest("#options-modal") && optionsModal.style.display === "block"){
+        optionsModal.style.display = "none"
+    }
 })
  
 function handleLikeClick(tweetId){ 

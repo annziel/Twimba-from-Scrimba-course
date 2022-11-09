@@ -67,7 +67,7 @@ textarea{
     line-height: 30px;
 }
 
-#reply-input{
+.reply-input{
     margin: 0 10px 0 0;
     border: 1px solid #D1DBE0;
     border-radius: 5px;

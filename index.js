@@ -240,7 +240,7 @@ function getFeedHtml(){
                 <div id="reply-area">    
                     <div class="tweet-inner">
                             <img src="images/scrimbalogo.png" class="profile-pic">
-                            <textarea placeholder="Tweet your reply" id="reply-input"></textarea>
+                            <textarea placeholder="Tweet your reply" class="reply-input"></textarea>
                     </div>
                 </div>
                 ${repliesHtml}

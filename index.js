@@ -65,7 +65,7 @@ const tweetsData = [
 ]
 const optionsModal = document.getElementById("options-modal")
 
-// eventListener and funtions it invokes
+// eventListeners and funtions they invokes
 document.addEventListener('click', function(e){
     if(e.target.dataset.like){
        handleLikeClick(e.target.dataset.like) 
@@ -74,10 +74,10 @@ document.addEventListener('click', function(e){
         handleRetweetClick(e.target.dataset.retweet)
     }
     else if(e.target.dataset.reply){
-        handleReplyClick(e.target.dataset.reply)
+        handleReplyEvent(e.target.dataset.reply)
     }
     else if(e.target.id === 'tweet-btn'){
-        handleTweetBtnClick()
+        handleTweetEvent()
     }
     else if(e.target.classList.contains("fa-angle-down")){
         showOptionsModal(e, e.target.dataset.tweetoptions)
@@ -120,11 +120,11 @@ function handleRetweetClick(tweetId){
     render() 
 }
 
-function handleReplyClick(replyId){
+function handleReplyEvent(replyId){
     document.getElementById(`replies-${replyId}`).classList.toggle('hidden')
 }
 
-function handleTweetBtnClick(){
+function handleTweetEvent(){
     const tweetInput = document.getElementById('tweet-input')
 
     if(tweetInput.value){
@@ -162,6 +162,30 @@ function deleteTweet(){
     tweetsData.splice(tweetIndex, 1)
     optionsModal.style.display = "none"
     render()
+}
+
+document.addEventListener('keydown', function(e){
+    if (e.code === 'Enter' && e.target.id === 'tweet-input') {
+        handleTweetEvent()
+    }
+    else if (e.code === 'Enter' && e.target.dataset.input) {
+        addReply(e.target.dataset.input)
+    }
+})
+
+function addReply(tweetId){
+    const targetTweetObj = tweetsData.filter(function(tweet){
+        return tweet.uuid === tweetId
+    })[0]
+    const tweetIndex = tweetsData.indexOf(targetTweetObj)
+    const inputOfReply = document.querySelector(`[data-input='${tweetId}']`)
+    tweetsData[tweetIndex].replies.unshift({
+        handle: `@Scrimba`,
+        profilePic: `images/scrimbalogo.png`,
+        tweetText: inputOfReply.value,
+    },)
+    render()
+    handleReplyEvent(tweetId)
 }
 
 // generating and rendering posts
@@ -240,7 +264,7 @@ function getFeedHtml(){
                 <div id="reply-area">    
                     <div class="tweet-inner">
                             <img src="images/scrimbalogo.png" class="profile-pic">
-                            <textarea placeholder="Tweet your reply" class="reply-input"></textarea>
+                            <textarea placeholder="Tweet your reply" class="reply-input" data-input="${tweet.uuid}"></textarea>
                     </div>
                 </div>
                 ${repliesHtml}

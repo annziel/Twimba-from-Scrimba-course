@@ -80,10 +80,13 @@ document.addEventListener('click', function(e){
         handleTweetBtnClick()
     }
     else if(e.target.classList.contains("fa-angle-down")){
-        showOptionsModal(e)
+        showOptionsModal(e, e.target.dataset.tweetoptions)
     }
-    else if(!e.target.closest("#options-modal") && optionsModal.style.display === "block"){
+    else if(!e.target.closest("#options-modal")){
         optionsModal.style.display = "none"
+    }
+    else if(e.target.closest("#options-modal")){
+        deleteTweet()
     }
 })
  
@@ -134,7 +137,7 @@ function handleTweetBtnClick(){
             replies: [],
             isLiked: false,
             isRetweeted: false,
-            uuid: "810a00ab-9659-40eb-a0a7-f63f10855e62"
+            uuid: `${Math.random()}`
         })
     render()
     tweetInput.value = ''
@@ -142,12 +145,23 @@ function handleTweetBtnClick(){
 
 }
 
-function showOptionsModal(e) {
+function showOptionsModal(e, tweetId) {
     Object.assign(optionsModal.style, {
         left: `${(e.pageX)-140}px`,
         top: `${e.pageY}px`,
         display: "block",
     })
+    optionsModal.dataset.modal = tweetId
+}
+
+function deleteTweet(){
+    const targetTweetObj = tweetsData.filter(function(tweet){
+        return tweet.uuid === optionsModal.dataset.modal
+    })[0]    
+    const tweetIndex = tweetsData.indexOf(targetTweetObj)
+    tweetsData.splice(tweetIndex, 1)
+    optionsModal.style.display = "none"
+    render()
 }
 
 // generating and rendering posts

@@ -5,7 +5,7 @@ change the uuid in handleTweetBtnClick()
 when local server set upped
 */
 
-const tweetsData = [   
+let tweetsData = [   
     {
         handle: `@TrollBot66756542 💎`,
         profilePic: `images/troll.jpg`,
@@ -63,6 +63,11 @@ const tweetsData = [
         uuid: '8hy671sff-c0f5-4545-9c4b-1237gyys45',
     },     
 ]
+
+if(localStorage.tweetsData){
+    tweetsData = JSON.parse(localStorage.getItem("tweetsData"))
+}    
+
 const optionsModal = document.getElementById("options-modal")
 
 // eventListeners and funtions they invokes
@@ -276,8 +281,8 @@ function getFeedHtml(){
 }
 
 function render(){
+    localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
     document.getElementById('feed').innerHTML = getFeedHtml()
 }
 
 render()
-

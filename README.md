@@ -1,7 +1,7 @@
 ## What it is:
 A Twitter variation built during the Module 5 of [The Frontend Developer Career Path]() on Scrimba.
 
-**[Check it out](https://scrimba.com/learn/frontend). You're already signed in** 😉
+**[Check it out](https://annziel.github.io/Twimba-from-Scrimba-course/). You're already signed in** 😉
 
 ## What did I build during the course?
 
@@ -23,4 +23,4 @@ Please don't include any sensitive information in your posts and comments. The d
 
 | At the beginning | After sample actions |
 | --- | ---|
-| <img width="350px" alt="View after opening the app" src="images/When you open the app.png">| <img width="400px" alt="View with a little customization" src="images/After a couple of actions.png"> |
+| <img width="400px" alt="View after opening the app" src="images/When you open the app.png">| <img width="400px" alt="View with a little customization" src="images/After a couple of actions.png"> |

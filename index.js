@@ -215,6 +215,11 @@ function getFeedHtml(){
         let repliesHtml = ''
         if(tweet.replies.length > 0){
             tweet.replies.forEach(function(reply){
+                let tweetOptionsClass = ''
+                if (reply.handle !== `@Scrimba`){
+                    tweetOptionsClass = 'hidden'
+                }
+
                 repliesHtml+=`
                 <div class="tweet-reply">
                     <div class="tweet-inner">
@@ -222,7 +227,7 @@ function getFeedHtml(){
                         <div>
                             <span class="tweet-header">
                                 <p class="handle">${reply.handle}</p>
-                                <i class="fa-solid fa-angle-down"
+                                <i class="fa-solid fa-angle-down ${tweetOptionsClass}"
                                 data-tweetoptions="${tweet.uuid}"
                                 ></i>
                             </span>
@@ -237,7 +242,7 @@ function getFeedHtml(){
         }
 
         let tweetOptionsClass = ''
-        if (tweet.handle !== `@Scrimba`){
+        if (tweet.handle !== `@Scrimba` || reply.handle !== `@Scrimba`){
             tweetOptionsClass = 'hidden'
         }
 

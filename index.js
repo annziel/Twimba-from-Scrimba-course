@@ -72,8 +72,8 @@ function handleTweetEvent(){
 
     if(tweetInput.value){
         tweetsData.unshift({
-            handle: `@Scrimba`,
-            profilePic: `images/scrimbalogo.png`,
+            handle: `@YourSuperAccount😎`,
+            profilePic: `images/YourSuperAccount.png`,
             likes: 0,
             retweets: 0,
             tweetText: tweetInput.value,
@@ -148,8 +148,8 @@ function addReply(tweetId){
     const inputOfReply = document.querySelector(`[data-input='${tweetId}']`)
     
     tweetsData[tweetIndex].replies.unshift({
-        handle: `@Scrimba`,
-        profilePic: `images/scrimbalogo.png`,
+        handle: `@YourSuperAccount😎`,
+        profilePic: `images/YourSuperAccount.png`,
         tweetText: inputOfReply.value,
         uuid: uuidv4(),
     },)
@@ -177,7 +177,7 @@ function getFeedHtml(){
         if(tweet.replies.length > 0){
             tweet.replies.forEach(function(reply){
                 let tweetOptionsClass = ''
-                if (reply.handle !== `@Scrimba`){
+                if (reply.handle !== `@YourSuperAccount😎`){
                     tweetOptionsClass = 'hidden'
                 }
 
@@ -203,7 +203,7 @@ function getFeedHtml(){
         }
 
         let tweetOptionsClass = ''
-        if (tweet.handle !== `@Scrimba`){
+        if (tweet.handle !== `@YourSuperAccount😎`){
             tweetOptionsClass = 'hidden'
         }
 
@@ -256,7 +256,7 @@ function getFeedHtml(){
             <div class="hidden" id="replies-${tweet.uuid}">
                 <div id="reply-area">    
                     <div class="tweet-inner">
-                            <img src="images/scrimbalogo.png" class="profile-pic">
+                            <img src="images/YourSuperAccount.png" class="profile-pic">
                             <textarea placeholder="Tweet your reply" class="reply-input" data-input="${tweet.uuid}"></textarea>
                     </div>
                 </div>

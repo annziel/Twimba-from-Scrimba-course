@@ -29,11 +29,13 @@ let tweetsData = [
                 handle: `@TomCruise ✅`,
                 profilePic: `images/tcruise.png`,
                 tweetText: `Yes! Sign me up! 😎🛩`,
+                uuid: `${Math.random()}`,
             },
                   {
                 handle: `@ChuckNorris ✅`,
                 profilePic: `images/chucknorris.jpeg`,
                 tweetText: `I went last year😴`,
+                uuid: `${Math.random()}`,
             },
         ],
         isLiked: false,
@@ -51,11 +53,13 @@ let tweetsData = [
                 handle: `@StackOverflower ☣️`,
                 profilePic: `images/overflow.png`,
                 tweetText: `No. Obviosuly not. Go get a job in McDonald's.`,
+                uuid: `${Math.random()}`,
             },
             {
                 handle: `@YummyCoder64`,
                 profilePic: `images/love.png`,
                 tweetText: `You are wonderful just as you are! ❤️`,
+                uuid: `${Math.random()}`,
             },
         ],
         isLiked: false,
@@ -91,7 +95,7 @@ document.addEventListener('click', function(e){
         optionsModal.style.display = "none"
     }
     else if(e.target.closest("#options-modal")){
-        deleteTweet()
+        deleteElement()
     }
 })
  
@@ -159,12 +163,29 @@ function showOptionsModal(e, elementId) {
     optionsModal.dataset.modal = elementId
 }
 
-function deleteTweet(){
-    const targetTweetObj = tweetsData.filter(function(tweet){
+function deleteElement(){
+    let targetTweetObj = tweetsData.filter(function(tweet){
         return tweet.uuid === optionsModal.dataset.modal
-    })[0]    
-    const tweetIndex = tweetsData.indexOf(targetTweetObj)
-    tweetsData.splice(tweetIndex, 1)
+    })[0]
+    
+    if(targetTweetObj){
+        const tweetIndex = tweetsData.indexOf(targetTweetObj)
+        tweetsData.splice(tweetIndex, 1)
+    }
+    else{
+        targetTweetObj = tweetsData.filter(function(tweet){
+            return tweet.replies.filter(function(reply){
+                return reply.uuid === optionsModal.dataset.modal
+            })[0]
+        })[0]
+        const tweetIndex = tweetsData.indexOf(targetTweetObj)
+        const targetReplyObj = tweetsData[tweetIndex].replies.filter(function(reply){
+            return reply.uuid === optionsModal.dataset.modal
+        })[0]
+        const replyIndex = tweetsData[tweetIndex].replies.indexOf(targetReplyObj)
+        tweetsData[tweetIndex].replies.splice(replyIndex, 1)
+    }
+
     optionsModal.style.display = "none"
     render()
 }
@@ -191,6 +212,7 @@ function addReply(tweetId){
         handle: `@Scrimba`,
         profilePic: `images/scrimbalogo.png`,
         tweetText: inputOfReply.value,
+        uuid: `${Math.random()}`,
     },)
 
     render()
@@ -228,7 +250,7 @@ function getFeedHtml(){
                             <span class="tweet-header">
                                 <p class="handle">${reply.handle}</p>
                                 <i class="fa-solid fa-angle-down ${tweetOptionsClass}"
-                                data-tweetoptions="${tweet.uuid}"
+                                data-tweetoptions="${reply.uuid}"
                                 ></i>
                             </span>
                             <p class="tweet-text">

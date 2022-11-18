@@ -1,8 +1,8 @@
 /* import tweetsData from another file & uuiv4,
 set up html type="module",
 delete tweetsData array below, and
-change the uuid in handleTweetBtnClick()
-when local server set upped
+change the uuid in handleTweeEvent()
+when local server setted up
 */
 
 let tweetsData = [   
@@ -150,13 +150,13 @@ function handleTweetEvent(){
 
 }
 
-function showOptionsModal(e, tweetId) {
+function showOptionsModal(e, elementId) {
     Object.assign(optionsModal.style, {
         left: `${(e.pageX)-140}px`,
         top: `${e.pageY}px`,
         display: "block",
     })
-    optionsModal.dataset.modal = tweetId
+    optionsModal.dataset.modal = elementId
 }
 
 function deleteTweet(){
@@ -242,7 +242,7 @@ function getFeedHtml(){
         }
 
         let tweetOptionsClass = ''
-        if (tweet.handle !== `@Scrimba` || reply.handle !== `@Scrimba`){
+        if (tweet.handle !== `@Scrimba`){
             tweetOptionsClass = 'hidden'
         }
 

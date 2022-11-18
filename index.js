@@ -219,13 +219,18 @@ function getFeedHtml(){
                 <div class="tweet-reply">
                     <div class="tweet-inner">
                         <img src="${reply.profilePic}" class="profile-pic">
-                            <div>
+                        <div>
+                            <span class="tweet-header">
                                 <p class="handle">${reply.handle}</p>
-                                <p class="tweet-text">
-                                    ${escapeHtml(reply.tweetText).replace(/\n\r?/g, '<br />')}
-                                </p>
-                            </div>
+                                <i class="fa-solid fa-angle-down"
+                                data-tweetoptions="${tweet.uuid}"
+                                ></i>
+                            </span>
+                            <p class="tweet-text">
+                                ${escapeHtml(reply.tweetText).replace(/\n\r?/g, '<br />')}
+                            </p>
                         </div>
+                    </div>
                 </div>
                 `
             })
@@ -303,3 +308,4 @@ function render(){
 }
 
 render()
+localStorage.clear()

@@ -1,72 +1,5 @@
-/* import tweetsData from another file & uuiv4,
-set up html type="module",
-delete tweetsData array below, and
-change the uuid in handleTweeEvent()
-when local server setted up
-*/
-
-let tweetsData = [   
-    {
-        handle: `@TrollBot66756542 💎`,
-        profilePic: `images/troll.jpg`,
-        likes: 27,
-        retweets: 10,
-        tweetText: `Buy Bitcoin, ETH Make 💰💰💰 low low prices. 
-            Guaranteed return on investment. HMU DMs open!!`,
-        replies: [],
-        isLiked: false,
-        isRetweeted: false,
-        uuid: '4b161eee-c0f5-4545-9c4b-8562944223ee',
-    },    
-    {
-        handle: `@Elon ✅`,
-        profilePic: `images/musk.png`,
-        likes: 6500,
-        retweets: 234,
-        tweetText: `I need volunteers for a one-way mission to Mars 🪐. No experience necessary🚀`,
-        replies: [
-                  {
-                handle: `@TomCruise ✅`,
-                profilePic: `images/tcruise.png`,
-                tweetText: `Yes! Sign me up! 😎🛩`,
-                uuid: `${Math.random()}`,
-            },
-                  {
-                handle: `@ChuckNorris ✅`,
-                profilePic: `images/chucknorris.jpeg`,
-                tweetText: `I went last year😴`,
-                uuid: `${Math.random()}`,
-            },
-        ],
-        isLiked: false,
-        isRetweeted: false,
-        uuid: '3c23454ee-c0f5-9g9g-9c4b-77835tgs2',
-    },
-        {
-        handle: `@NoobCoder12`,
-        profilePic: `images/flower.png`,
-        likes: 10,
-        retweets: 3,
-        tweetText: `Are you a coder if you only know HTML?`,
-        replies: [
-            {
-                handle: `@StackOverflower ☣️`,
-                profilePic: `images/overflow.png`,
-                tweetText: `No. Obviosuly not. Go get a job in McDonald's.`,
-                uuid: `${Math.random()}`,
-            },
-            {
-                handle: `@YummyCoder64`,
-                profilePic: `images/love.png`,
-                tweetText: `You are wonderful just as you are! ❤️`,
-                uuid: `${Math.random()}`,
-            },
-        ],
-        isLiked: false,
-        isRetweeted: false,
-        uuid: '8hy671sff-c0f5-4545-9c4b-1237gyys45',
-    },     
-]
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+import { tweetsData } from './data.js'
 
 if(localStorage.tweetsData){
     tweetsData = JSON.parse(localStorage.getItem("tweetsData"))
@@ -146,7 +79,7 @@ function handleTweetEvent(){
             replies: [],
             isLiked: false,
             isRetweeted: false,
-            uuid: `${Math.random()}`
+            uuid: uuidv4()
         })
     render()
     tweetInput.value = ''
@@ -168,6 +101,7 @@ function deleteElement(){
         return tweet.uuid === optionsModal.dataset.modal
     })[0]
     
+    let tweetUuid
     if(targetTweetObj){
         const tweetIndex = tweetsData.indexOf(targetTweetObj)
         tweetsData.splice(tweetIndex, 1)
@@ -178,6 +112,7 @@ function deleteElement(){
                 return reply.uuid === optionsModal.dataset.modal
             })[0]
         })[0]
+        tweetUuid = targetTweetObj.uuid
         const tweetIndex = tweetsData.indexOf(targetTweetObj)
         const targetReplyObj = tweetsData[tweetIndex].replies.filter(function(reply){
             return reply.uuid === optionsModal.dataset.modal
@@ -188,6 +123,9 @@ function deleteElement(){
 
     optionsModal.style.display = "none"
     render()
+    if(tweetUuid){
+        handleReplyEvent(tweetUuid)
+    }
 }
 
 document.addEventListener('keydown', function(e){
@@ -212,7 +150,7 @@ function addReply(tweetId){
         handle: `@Scrimba`,
         profilePic: `images/scrimbalogo.png`,
         tweetText: inputOfReply.value,
-        uuid: `${Math.random()}`,
+        uuid: uuidv4(),
     },)
 
     render()

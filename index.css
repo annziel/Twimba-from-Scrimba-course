@@ -17,7 +17,7 @@ i{
     cursor: pointer;
 }
 
-.tweet-option{
+.tweet-header{
     display:flex;
     justify-content: space-between;
 }
@@ -172,12 +172,8 @@ button{
 }
 
 /* utility */
-.hidden, #hidden{
-    display: none;
-}
-
-#render{
-    display:block;
+body .hidden {
+    display: none ;
 }
 
 /* modal */

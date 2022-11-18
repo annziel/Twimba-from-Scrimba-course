@@ -170,10 +170,12 @@ function deleteTweet(){
 }
 
 document.addEventListener('keydown', function(e){
-    if (e.code === 'Enter' && e.target.id === 'tweet-input') {
+    if (e.code === 'Enter' && !e.shiftKey && e.target.id === 'tweet-input') {
+        e.preventDefault()
         handleTweetEvent()
     }
-    else if (e.code === 'Enter' && e.target.dataset.input) {
+    else if (e.code === 'Enter' && !e.shiftKey && e.target.dataset.input) {
+        e.preventDefault()
         addReply(e.target.dataset.input)
     }
 })
@@ -184,25 +186,32 @@ function addReply(tweetId){
     })[0]
     const tweetIndex = tweetsData.indexOf(targetTweetObj)
     const inputOfReply = document.querySelector(`[data-input='${tweetId}']`)
+    
     tweetsData[tweetIndex].replies.unshift({
         handle: `@Scrimba`,
         profilePic: `images/scrimbalogo.png`,
         tweetText: inputOfReply.value,
     },)
+
     render()
     handleReplyEvent(tweetId)
 }
+
+function escapeHtml(unsafe){
+    return (unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+    );
+ }
 
 // generating and rendering posts
 function getFeedHtml(){
     let feedHtml = ``
     
-    tweetsData.forEach(function(tweet){ 
-        let tweetOptionsId = 'hidden'
-        if(tweet.handle === `@Scrimba`){
-            tweetOptionsId = 'render'
-        }
-        
+    tweetsData.forEach(function(tweet){         
         let repliesHtml = ''
         if(tweet.replies.length > 0){
             tweet.replies.forEach(function(reply){
@@ -212,12 +221,19 @@ function getFeedHtml(){
                         <img src="${reply.profilePic}" class="profile-pic">
                             <div>
                                 <p class="handle">${reply.handle}</p>
-                                <p class="tweet-text">${reply.tweetText}</p>
+                                <p class="tweet-text">
+                                    ${escapeHtml(reply.tweetText).replace(/\n\r?/g, '<br />')}
+                                </p>
                             </div>
                         </div>
                 </div>
                 `
             })
+        }
+
+        let tweetOptionsClass = ''
+        if (tweet.handle !== `@Scrimba`){
+            tweetOptionsClass = 'hidden'
         }
 
         let likeIconClass = ''
@@ -229,20 +245,21 @@ function getFeedHtml(){
         if (tweet.isRetweeted){
             retweetIconClass = 'retweeted'
         }
-          
+
         feedHtml += `
         <div class="tweet">
             <div class="tweet-inner">
                 <img src="${tweet.profilePic}" class="profile-pic">
                 <div>
-                    <span class="tweet-option">
+                    <span class="tweet-header">
                         <p class="handle">${tweet.handle}</p>
-                        <i class="fa-solid fa-angle-down"
-                        id="${tweetOptionsId}"
+                        <i class="fa-solid fa-angle-down ${tweetOptionsClass}"
                         data-tweetoptions="${tweet.uuid}"
                         ></i>
                     </span>
-                    <p class="tweet-text">${tweet.tweetText}</p>
+                    <p class="tweet-text">
+                        ${escapeHtml(tweet.tweetText).replace(/\n\r?/g, '<br />')}
+                    </p>
                     <div class="tweet-details">
                         <span class="tweet-detail">
                             <i class="fa-regular fa-comment-dots"
@@ -276,8 +293,8 @@ function getFeedHtml(){
             </div>
         </div>
         `
-   })
-   return feedHtml 
+    })
+    return feedHtml
 }
 
 function render(){

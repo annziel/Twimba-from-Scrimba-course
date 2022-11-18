@@ -17,11 +17,6 @@ i{
     cursor: pointer;
 }
 
-.tweet-header{
-    display:flex;
-    justify-content: space-between;
-}
-
 .fa-solid{
     color: #999;
 }
@@ -68,10 +63,10 @@ textarea{
 }
 
 .reply-input{
-    margin: 0 10px 0 0;
+    background: #EDF7FD;
     border: 1px solid #D1DBE0;
     border-radius: 5px;
-    background: #EDF7FD;
+    margin: 0 10px 0 0;
     height: 14px;
     font-size: 14px;
 }
@@ -79,23 +74,28 @@ textarea{
 button{
     background-color: #1DA1F2;
     border: none;
-    color: white;
-    padding: 10px 19px;
     border-radius: 20px;
-    width: 100%; 
+    margin-bottom: 15px;
+    padding: 10px 19px;
+    width: 100%;
     cursor: pointer;
+    color: white;
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 15px;
 }
 
 /* tweet */
 
 .tweet{
     border-top: 1px solid lightgray;
+    margin: 0;
     padding: 20px 0 0 0;
     width: 100%;
-    margin: 0;
+}
+
+.tweet-header{
+    display:flex;
+    justify-content: space-between;
 }
 
 .tweet-inner{
@@ -107,9 +107,9 @@ button{
 
 .tweet-details{
     display: flex;
-    font-size: 13px;
     justify-content: space-between;
     width: 160px;
+    font-size: 13px;
 }
 
 .tweet-detail{
@@ -118,9 +118,9 @@ button{
 }
 
 .tweet-reply{
-    padding-top: 20px;
     margin-right: 0;
     margin-left: 40px;
+    padding-top: 20px;
     padding-left: 0;
     width: 250px;
 }
@@ -132,7 +132,6 @@ button{
 
 .tweet-reply, #reply-area{
     border-top: 1px solid lightgray;
-
 }
 
 #reply-area .tweet-inner{
@@ -148,15 +147,15 @@ button{
 }
 
 .tweet-text{
+    margin-top: 10px;
     width: 220px;
     font-size: 14px;
     line-height: 20px;
-    margin-top: 10px;
 }
 
 .tweet-reply .tweet-text{
-    width: 180px;
     margin-bottom: 0;
+    width: 180px;
 }
 
 /* images */
@@ -177,20 +176,23 @@ body .hidden {
 }
 
 /* modal */
+
 #options-modal{
     display: none;
     position: absolute;
+    border-radius: 3px;
+    padding: 10px 20px;
+    width: 80px;
     background: #f4f4f4;
     color: #555;
-    padding: 10px 20px;
-    width:100px;
-    border-radius: 3px;
 }
 
 #options-modal p{
     margin: 0;
     font-size: 14px;
 }
+
+/* interactions */
 
 #options-modal:hover,
 #options-modal:focus,

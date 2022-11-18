@@ -1,14 +1,14 @@
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid'
 import {createTweetsDataFile} from './data.js'
-let tweetsData = createTweetsDataFile()
 
+let tweetsData = createTweetsDataFile()
 if(localStorage.tweetsData){
     tweetsData = JSON.parse(localStorage.getItem("tweetsData"))
 }    
 
 const optionsModal = document.getElementById("options-modal")
 
-// eventListeners and funtions they invokes
+// eventListeners and functions they invokes
 document.addEventListener('click', function(e){
     if(e.target.dataset.like){
        handleLikeClick(e.target.dataset.like) 
@@ -72,7 +72,7 @@ function handleTweetEvent(){
 
     if(tweetInput.value){
         tweetsData.unshift({
-            handle: `@YourSuperAccount😎`,
+            handle: `@YourSuperAccount 😎`,
             profilePic: `images/YourSuperAccount.png`,
             likes: 0,
             retweets: 0,
@@ -88,7 +88,7 @@ function handleTweetEvent(){
 
 }
 
-function showOptionsModal(e, elementId) {
+function showOptionsModal(e, elementId){
     Object.assign(optionsModal.style, {
         left: `${(e.pageX)-140}px`,
         top: `${e.pageY}px`,
@@ -130,11 +130,11 @@ function deleteElement(){
 }
 
 document.addEventListener('keydown', function(e){
-    if (e.code === 'Enter' && !e.shiftKey && e.target.id === 'tweet-input') {
+    if (e.code === 'Enter' && !e.shiftKey && e.target.id === 'tweet-input'){
         e.preventDefault()
         handleTweetEvent()
     }
-    else if (e.code === 'Enter' && !e.shiftKey && e.target.dataset.input) {
+    else if (e.code === 'Enter' && !e.shiftKey && e.target.dataset.input){
         e.preventDefault()
         addReply(e.target.dataset.input)
     }
@@ -148,7 +148,7 @@ function addReply(tweetId){
     const inputOfReply = document.querySelector(`[data-input='${tweetId}']`)
     
     tweetsData[tweetIndex].replies.unshift({
-        handle: `@YourSuperAccount😎`,
+        handle: `@YourSuperAccount 😎`,
         profilePic: `images/YourSuperAccount.png`,
         tweetText: inputOfReply.value,
         uuid: uuidv4(),
@@ -158,17 +158,13 @@ function addReply(tweetId){
     handleReplyEvent(tweetId)
 }
 
-function escapeHtml(unsafe){
-    return (unsafe
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;")
-    );
- }
 
 // generating and rendering posts
+function render(){
+    localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
+    document.getElementById('feed').innerHTML = getFeedHtml()
+}
+
 function getFeedHtml(){
     let feedHtml = ``
     
@@ -177,7 +173,7 @@ function getFeedHtml(){
         if(tweet.replies.length > 0){
             tweet.replies.forEach(function(reply){
                 let tweetOptionsClass = ''
-                if (reply.handle !== `@YourSuperAccount😎`){
+                if (reply.handle !== `@YourSuperAccount 😎`){
                     tweetOptionsClass = 'hidden'
                 }
 
@@ -203,7 +199,7 @@ function getFeedHtml(){
         }
 
         let tweetOptionsClass = ''
-        if (tweet.handle !== `@YourSuperAccount😎`){
+        if (tweet.handle !== `@YourSuperAccount 😎`){
             tweetOptionsClass = 'hidden'
         }
 
@@ -268,10 +264,15 @@ function getFeedHtml(){
     return feedHtml
 }
 
-function render(){
-    localStorage.setItem("tweetsData", JSON.stringify(tweetsData))
-    document.getElementById('feed').innerHTML = getFeedHtml()
-}
+function escapeHtml(unsafe){
+    return (unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+    );
+ }
+
 
 render()
-localStorage.clear()

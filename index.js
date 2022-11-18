@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
-import { tweetsData } from './data.js'
+import {createTweetsDataFile} from './data.js'
+let tweetsData = createTweetsDataFile()
 
 if(localStorage.tweetsData){
     tweetsData = JSON.parse(localStorage.getItem("tweetsData"))

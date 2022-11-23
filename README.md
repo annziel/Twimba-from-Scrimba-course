@@ -1,5 +1,5 @@
 # Twimba:
-A Twitter variation built during the Module 5 of [The Frontend Developer Career Path]() on Scrimba.
+A Twitter variation built during the Module 5 of [The Frontend Developer Career Path](https://scrimba.com/learn/frontend) on Scrimba.
 
 **[Check it out](https://annziel.github.io/Twimba-from-Scrimba-course/). You're already signed in** 😉
 
